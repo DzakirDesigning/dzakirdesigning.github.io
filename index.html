@@ -12,8 +12,9 @@
            ========================================================================== */
         html,
         body {
-            overflow-x: hidden;
+            overflow: hidden; /* Mengunci scroll luar agar tidak bertabrakan dengan scroll aplikasi */
             width: 100%;
+            height: 100dvh; /* Menggunakan height pasti */
             position: relative;
             max-width: 100%;
             overscroll-behavior-y: none;
@@ -85,13 +86,13 @@
     </style>
 </head>
 
-<body class="bg-[#FFF0F5] sm:bg-[#FFE4E1] flex justify-center items-center min-h-screen font-sans antialiased text-neutral-800">
+<body class="bg-[#FFF0F5] sm:bg-[#FFE4E1] flex justify-center items-center h-[100dvh] overflow-hidden font-sans antialiased text-neutral-800">
 
     <div id="toast" class="fixed top-12 left-1/2 transform -translate-x-1/2 bg-neutral-900 text-white px-6 py-3 rounded-full shadow-2xl z-[100] opacity-0 transition-all duration-300 pointer-events-none text-[13px] font-bold flex items-center gap-2 translate-y-[-20px]">
         ✅ Ditambahkan ke Keranjang
     </div>
 
-    <div class="w-full max-w-[430px] h-[100dvh] bg-[#FFF0F5] overflow-hidden relative flex flex-col sm:shadow-2xl sm:rounded-[40px] sm:my-4 sm:h-[95dvh]">
+    <div class="w-full max-w-[430px] h-full bg-[#FFF0F5] overflow-hidden relative flex flex-col sm:shadow-2xl sm:rounded-[40px] sm:my-4 sm:h-[95dvh]">
 
         <div class="flex-1 overflow-hidden relative no-scrollbar" id="main-scroll">
             <div id="scroll-wrapper" class="w-full h-full transition-transform duration-700 ease-in-out">
@@ -154,7 +155,7 @@
 
                     <div id="home-view" class="absolute inset-0 overflow-y-auto overflow-x-hidden no-scrollbar pb-32 transition-all duration-500 w-full h-full bg-[#FFF5F8]">
                         
-                        <div class="sticky top-0 z-30 bg-[#FFF5F8] flex justify-between items-center px-6 pt-10 pb-4">
+                        <div class="sticky top-0 z-30 bg-[#FFF5F8] flex justify-between items-center px-6 pt-4 pb-4">
                             <div class="flex items-center gap-3">
                                 <button onclick="showToast('Menu Fitur: Segera Hadir!')" class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_10px_rgb(0,0,0,0.03)] text-neutral-700 hover:text-[#FF9FBB] transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
@@ -525,6 +526,10 @@
             { id: 'buket-bunga-5', categoryId: 'buket-bunga', name: 'Buket Bunga Besar', price: 65000, img: 'gambar/buket.bunga.5.jpg', desc: 'Buket bunga ukuran besar yang mewah dan spektakuler. Cocok untuk momen lamaran atau hadiah utama.' },
             { id: 'buket-bunga-6', categoryId: 'buket-bunga', name: 'Buket Bunga Sky Blue', price: 65000, img: 'gambar/buket.mawar.1.jpeg', desc: 'Buket mawar biru langit yang menenangkan, cocok untuk hadiah romantis atau kejutan spesial.' },
             { id: 'buket-bunga-7', categoryId: 'buket-bunga', name: 'Buket Bunga Pink', price: 65000, img: 'gambar/buket.mawar.2.jpeg', desc: 'Buket mawar pink yang manis dan lembut, cocok untuk hadiah ulang tahun atau kejutan romantis.' },   
+            { id: 'buket-bunga-8', categoryId: 'buket-bunga', name: 'Buket Bunga Ungu', price: 65000, img: 'gambar/buket.bunga.8.jpeg', desc: 'Buket mawar ungu yang elegan dan misterius, memberikan kesan mewah untuk momen spesial.' },
+            { id: 'buket-bunga-9', categoryId: 'buket-bunga', name: 'Buket Bunga Merah', price: 65000, img: 'gambar/buket.bunga.9.jpeg', desc: 'Buket mawar merah klasik yang melambangkan cinta sejati, sempurna untuk hadiah romantis.' },
+            { id: 'buket-bunga-10', categoryId: 'buket-bunga', name: 'Buket Bunga Campur', price: 65000, img: 'gambar/buket.bunga.10.jpeg', desc: 'Buket bunga campuran dengan berbagai jenis bunga segar, memberikan kesan ceria dan penuh warna.' },
+            { id: 'buket-bunga-11', categoryId: 'buket-bunga', name: 'Buket Bunga Kuning', price: 65000, img: 'gambar/buket.bunga.11.jpeg', desc: 'Buket mawar kuning yang cerah dan menyenangkan, cocok untuk hadiah persahabatan atau kejutan ceria.' },
             { id: 'buket-satin-1', categoryId: 'buket-satin', name: 'Buket Satin Merah', price: 125000, img: 'gambar/buket.satin.1.jpg', desc: 'Buket bunga satin warna merah merona yang awet dan tidak akan pernah layu. Tampil elegan dan mewah.' },
             { id: 'buket-satin-2', categoryId: 'buket-satin', name: 'Buket Satin Pink', price: 125000, img: 'gambar/buket.satin.2.jpg', desc: 'Buket satin bernuansa pink lembut, memberikan kesan manis dan romantis untuk orang terkasih.' },
             { id: 'buket-satin-3', categoryId: 'buket-satin', name: 'Buket Satin Biru', price: 125000, img: 'gambar/buket.satin.3.jpg', desc: 'Buket satin elegan berwarna biru yang menenangkan. Alternatif buket kekinian untuk pria atau wanita.' },
@@ -534,6 +539,9 @@
             { id: 'buket-boneka-2', categoryId: 'buket-boneka', name: 'Buket Boneka Wisuda', price: 48000, img: 'gambar/buket.boneka.2.jpg', desc: 'Buket boneka beruang memakai toga dan atribut wisuda. Hadiah paling populer untuk momen kelulusan.' },
             { id: 'buket-boneka-3', categoryId: 'buket-boneka', name: 'Buket Boneka Karakter', price: 48000, img: 'gambar/buket.boneka.3.jpg', desc: 'Pilihan boneka karakter favorit yang dirangkai layaknya buket bunga mekar yang lucu.' },
             { id: 'buket-boneka-4', categoryId: 'buket-boneka', name: 'Buket Boneka Jumbo', price: 48000, img: 'gambar/buket.boneka.4.jpg', desc: 'Buket boneka berukuran cukup besar yang memberikan pelukan hangat bagi sang penerima.' },
+            { id: 'buket-boneka-5', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 48000, img: 'gambar/buket.guru.1.jpeg', desc: 'Buket boneka ukuran mini yang imut dan mudah dibawa, cocok untuk kejutan kecil namun bermakna.' },
+            { id: 'buket-boneka-6', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 48000, img: 'gambar/buket.guru.2.jpeg', desc: 'Buket boneka mini yang lucu dan ringkas, pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
+            { id: 'buket-boneka-7', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 48000, img: 'gambar/buket.guru.3.jpeg', desc: 'Buket boneka mini yang lucu dan ringkas, pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
             { id: 'buket-uang-1', categoryId: 'buket-uang', name: 'Buket Uang model 10 lbr', price: 48000, img: 'gambar/buket.uang.1.jpg', desc: 'Buket uang kekinian berisi susunan uang 10 lembar (nominal sesuai permintaan) yang rapi dan aman.' },
             { id: 'buket-uang-2', categoryId: 'buket-uang', name: 'Buket Uang model 10 lbr', price: 48000, img: 'gambar/buket.uang.2.jpg', desc: 'Buket uang elegan 10 lembar yang dirangkai sedemikian rupa sehingga tidak merusak uang.' },
             { id: 'buket-uang-3', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model biasa', price: 30000, img: 'gambar/buket.uang.3.jpg', desc: 'Versi minimalis untuk buket uang 10 lembar, cocok untuk hadiah praktis dengan budget terjangkau.' },
