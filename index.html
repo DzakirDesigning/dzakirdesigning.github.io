@@ -36,6 +36,24 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        /* Animasi Muncul Bertahap untuk Produk */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            /* Ubah 0.6s menjadi 1s atau 1.2s */
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0; 
+        }
 
         /* Transisi Halaman (Slide Effect) */
         .slide-in {
@@ -747,22 +765,22 @@
             { id: 'buket-uang-2', categoryId: 'buket-uang', name: 'Buket Uang model 35 lbr incloud duit', price: 435000, img: 'gambar/buket.uang.8.jpeg', desc: 'Buket uang elegan 10 lembar yang dirangkai sedemikian rupa sehingga tidak merusak uang.' },
             { id: 'buket-uang-3', categoryId: 'buket-uang', name: 'Buket Uang 20 lbr model biasa', price: 159000, img: 'gambar/buket.uang.7.jpeg', desc: 'Versi minimalis untuk buket uang 10 lembar, cocok untuk hadiah praktis dengan budget terjangkau.' },
             { id: 'buket-uang-4', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah incloud duit', price: 440000, img: 'gambar/buket.uang.4.jpg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-5', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 48000, img: 'gambar/buket.uang.5.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-6', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 48000, img: 'gambar/buket.uang.6.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-7', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.1.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
+            { id: 'buket-uang-5', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 248000, img: 'gambar/buket.uang.5.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
+            { id: 'buket-uang-6', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 59000, img: 'gambar/buket.uang.6.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
+            { id: 'buket-uang-7', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 98000, img: 'gambar/buket.uang.1.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
             { id: 'buket-uang-8', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.2.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
             { id: 'buket-uang-9', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.9.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-10', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.10.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
+            { id: 'buket-uang-10', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 115000, img: 'gambar/buket.uang.10.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
             { id: 'buket-uang-11', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 210000, img: 'gambar/buket.uang.11.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-12', categoryId: 'buket-uang', name: 'Buket Uang 14 lbr duit campuran', price: 48000, img: 'gambar/buket.uang.3.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
+            { id: 'buket-uang-12', categoryId: 'buket-uang', name: 'Buket Uang 14 lbr duit campuran', price: 58000, img: 'gambar/buket.uang.3.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
             { id: 'buket-mini-1', categoryId: 'buket-mini', name: 'Buket Mini 1', price: 15000, img: 'gambar/buket.mini.1.jpg', desc: 'Buket mini lucu dan ringkas. Pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
             { id: 'buket-mini-2', categoryId: 'buket-mini', name: 'Buket Mini 2', price: 15000, img: 'gambar/buket.mini.2.jpg', desc: 'Desain buket berukuran kecil yang mudah dibawa-bawa namun tetap punya detail menawan.' },
             { id: 'buket-mini-3', categoryId: 'buket-mini', name: 'Buket Mini 3', price: 15000, img: 'gambar/buket.mini.3.jpg', desc: 'Seri buket mini untuk acara perpisahan rekan kerja atau sekadar kejutan santai harian.' },
-            { id: 'buket-snack-1', categoryId: 'buket-snack', name: 'Buket Snack 1', price: 20000, img: 'gambar/buket.snack.1.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-2', categoryId: 'buket-snack', name: 'Buket Snack 2', price: 20000, img: 'gambar/buket.snack.2.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-3', categoryId: 'buket-snack', name: 'Buket Snack 3', price: 20000, img: 'gambar/buket.snack.3.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-4', categoryId: 'buket-snack', name: 'Buket Snack 4', price: 20000, img: 'gambar/buket.snack.4.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-5', categoryId: 'buket-snack', name: 'Buket Snack 5', price: 20000, img: 'gambar/buket.snack.5.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
+            { id: 'buket-snack-1', categoryId: 'buket-snack', name: 'Buket Snack 1', price: 35000, img: 'gambar/buket.snack.1.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
+            { id: 'buket-snack-2', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.2.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
+            { id: 'buket-snack-3', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.3.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
+            { id: 'buket-snack-4', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.4.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
+            { id: 'buket-snack-5', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.5.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
             { id: 'printing-1', categoryId: 'printing', name: 'Fotocopy', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Melayani cetak satu sisi atau bolak-balik (duplex), perkecil/perbesar ukuran dokumen, serta fotocopy dokumen massal untuk kebutuhan rapat atau bahan ajar.' },
             { id: 'printing-2', categoryId: 'printing', name: 'Scan Dokumen', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Konversi dokumen fisik (KTP, Ijazah, Sertifikat, dll) menjadi file digital berkualitas tinggi. Hasil file bisa dikirim dalam format PDF atau JPG via Email/WhatsApp.' },
             { id: 'printing-3', categoryId: 'printing', name: 'Stiker Transparan', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Memberikan kesan elegan karena bagian latar belakang stiker tembus pandang.' },
@@ -976,13 +994,16 @@
         }
 
         /* --- INTERFACE CORE LAYOUT RENDERING --- */
-        function generateProductCardHTML(prod) {
+        function generateProductCardHTML(prod, index = 0) {
             const isFav = favorites.includes(prod.id);
             const favColor = isFav ? 'text-[#FF8FA3]' : 'text-neutral-300';
             const favFill = isFav ? 'currentColor' : 'none';
+            
+            // Ubah menjadi 0.1 atau 0.15
+            const delay = index * 0.1;
 
             return `
-                <div onclick="openDetail('${prod.id}')" class="bg-white rounded-[24px] p-3 shadow-[0_8px_20px_rgb(0,0,0,0.03)] border border-neutral-50 relative cursor-pointer flex flex-col group transition-all duration-300 hover:shadow-[0_15px_30px_rgba(255,182,193,0.1)] hover:-translate-y-1">
+                <div onclick="openDetail('${prod.id}')" class="animate-fade-in-up bg-white rounded-[24px] p-3 shadow-[0_8px_20px_rgb(0,0,0,0.03)] border border-neutral-50 relative cursor-pointer flex flex-col group transition-all duration-300 hover:shadow-[0_15px_30px_rgba(255,182,193,0.1)] hover:-translate-y-1" style="animation-delay: ${delay}s;">
                     <button class="absolute top-4 right-4 w-7 h-7 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center z-10 shadow-sm ${favColor} hover:text-[#FF8FA3] transition-colors" onclick="event.stopPropagation(); toggleFavorite('${prod.id}')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="${favFill}" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
                     </button>
@@ -1017,7 +1038,8 @@
             const filtered = categoryId === 'semua-produk'
                 ? allProducts
                 : allProducts.filter(p => p.categoryId === categoryId);
-            grid.innerHTML = filtered.map(prod => generateProductCardHTML(prod)).join('');
+            // UBAH BARIS BAWAH INI
+            grid.innerHTML = filtered.map((prod, index) => generateProductCardHTML(prod, index)).join('');
         }
 
         function filterSearch() {
@@ -1038,11 +1060,13 @@
 
             const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
 
+            // ... (di dalam fungsi filterSearch, sekitar baris paling bawah fungsi tersebut)
             if (filtered.length === 0) {
                 grid.innerHTML = `<div class="col-span-2 text-center text-neutral-400 py-10 text-[13px] font-medium">Hmm, produk tidak ditemukan...</div>`;
                 return;
             }
-            grid.innerHTML = filtered.map(prod => generateProductCardHTML(prod)).join('');
+            // UBAH BARIS BAWAH INI
+            grid.innerHTML = filtered.map((prod, index) => generateProductCardHTML(prod, index)).join('');
         }
 
         function selectCategory(categoryId, element) {
