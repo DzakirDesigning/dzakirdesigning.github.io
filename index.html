@@ -36,13 +36,14 @@
         html {
             scroll-behavior: smooth;
         }
-        
+
         /* Animasi Muncul Bertahap untuk Produk */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -52,7 +53,7 @@
         .animate-fade-in-up {
             /* Ubah 0.6s menjadi 1s atau 1.2s */
             animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0; 
+            opacity: 0;
         }
 
         /* Transisi Halaman (Slide Effect) */
@@ -493,7 +494,7 @@
                                 <span id="cart-total" class="text-[20px] font-black text-[#FF8FA3]">Rp 0</span>
                             </div>
                             <!-- Tombol Checkout WA yang sudah diubah menjadi pink -->
-                            <button onclick="checkoutCartWA()"
+                            <button onclick="checkoutKeFirebase()"
                                 class="w-full h-14 rounded-full bg-[#FF8FA3] shadow-[0_10px_20px_rgba(255,143,163,0.3)] flex justify-center items-center gap-3 active:scale-[0.98] transition-all hover:bg-[#FF7A93] text-white hover:text-white">
                                 <span class="font-bold text-[15px] tracking-wide">Pesan Sekarang via WA</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -649,7 +650,9 @@
                     </div>
 
                     <!-- Efek Buram/Fade Out di Bagian Bawah -->
-                    <div class="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#FFF5F8] via-[#FFF5F8]/80 to-transparent z-30 pointer-events-none"></div>
+                    <div
+                        class="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#FFF5F8] via-[#FFF5F8]/80 to-transparent z-30 pointer-events-none">
+                    </div>
 
                     <!-- Menu Navigasi Bawah (Main Nav) -->
                     <div id="main-nav"
@@ -737,75 +740,7 @@
         ];
 
         // MENGUBAH ARRAY: Menambahkan properti "desc" untuk masing-masing produk
-        let allProducts = [
-            { id: 'buket-bunga-1', categoryId: 'buket-bunga', name: 'Buket Bunga Premium', price: 65000, img: 'gambar/buket.bunga.1.jpg', desc: 'Buket bunga premium dengan sentuhan elegan menggunakan kombinasi mawar merah dan dedaunan segar. Sangat cocok untuk kado anniversary atau kejutan untuk orang tersayang.' },
-            { id: 'buket-bunga-2', categoryId: 'buket-bunga', name: 'Buket Bunga Mawar', price: 65000, img: 'gambar/buket.bunga.2.jpg', desc: 'Rangkaian buket mawar pilihan dengan kualitas terbaik, dibalut wrapping bernuansa pastel yang memukau.' },
-            { id: 'buket-bunga-3', categoryId: 'buket-bunga', name: 'Buket Bunga Lily', price: 65000, img: 'gambar/buket.bunga.3.jpg', desc: 'Buket Bunga Lily putih suci yang melambangkan ketulusan. Dirangkai indah dengan aksen baby breath.' },
-            { id: 'buket-bunga-4', categoryId: 'buket-bunga', name: 'Buket Bunga Wisuda', price: 65000, img: 'gambar/buket.bunga.4.jpg', desc: 'Buket bunga wisuda spesial dengan kombinasi warna ceria, siap menyempurnakan hari kelulusanmu.' },
-            { id: 'buket-bunga-5', categoryId: 'buket-bunga', name: 'Buket Bunga Besar', price: 65000, img: 'gambar/buket.bunga.5.jpg', desc: 'Buket bunga ukuran besar yang mewah dan spektakuler. Cocok untuk momen lamaran atau hadiah utama.' },
-            { id: 'buket-bunga-6', categoryId: 'buket-bunga', name: 'Buket Bunga Sky Blue', price: 65000, img: 'gambar/buket.mawar.1.jpeg', desc: 'Buket mawar biru langit yang menenangkan, cocok untuk hadiah romantis atau kejutan spesial.' },
-            { id: 'buket-bunga-7', categoryId: 'buket-bunga', name: 'Buket Bunga Pink', price: 65000, img: 'gambar/buket.mawar.2.jpeg', desc: 'Buket mawar pink yang manis dan lembut, cocok untuk hadiah ulang tahun atau kejutan romantis.' },
-            { id: 'buket-bunga-8', categoryId: 'buket-bunga', name: 'Buket Bunga Ungu', price: 65000, img: 'gambar/buket.bunga.8.jpeg', desc: 'Buket mawar ungu yang elegan dan misterius, memberikan kesan mewah untuk momen spesial.' },
-            { id: 'buket-bunga-9', categoryId: 'buket-bunga', name: 'Buket Bunga Merah', price: 65000, img: 'gambar/buket.bunga.9.jpeg', desc: 'Buket mawar merah klasik yang melambangkan cinta sejati, sempurna untuk hadiah romantis.' },
-            { id: 'buket-bunga-10', categoryId: 'buket-bunga', name: 'Buket Bunga Campur', price: 65000, img: 'gambar/buket.bunga.10.jpeg', desc: 'Buket bunga campuran dengan berbagai jenis bunga segar, memberikan kesan ceria dan penuh warna.' },
-            { id: 'buket-bunga-11', categoryId: 'buket-bunga', name: 'Buket Bunga Kuning', price: 65000, img: 'gambar/buket.bunga.11.jpeg', desc: 'Buket mawar kuning yang cerah dan menyenangkan, cocok untuk hadiah persahabatan atau kejutan ceria.' },
-            { id: 'buket-satin-1', categoryId: 'buket-satin', name: 'Buket Satin Merah', price: 125000, img: 'gambar/buket.satin.1.jpg', desc: 'Buket bunga satin warna merah merona yang awet dan tidak akan pernah layu. Tampil elegan dan mewah.' },
-            { id: 'buket-satin-2', categoryId: 'buket-satin', name: 'Buket Satin Pink', price: 125000, img: 'gambar/buket.satin.2.jpg', desc: 'Buket satin bernuansa pink lembut, memberikan kesan manis dan romantis untuk orang terkasih.' },
-            { id: 'buket-satin-3', categoryId: 'buket-satin', name: 'Buket Satin Biru', price: 125000, img: 'gambar/buket.satin.3.jpg', desc: 'Buket satin elegan berwarna biru yang menenangkan. Alternatif buket kekinian untuk pria atau wanita.' },
-            { id: 'buket-satin-4', categoryId: 'buket-satin', name: 'Buket Satin Cream', price: 125000, img: 'gambar/buket.satin.4.jpg', desc: 'Satin warna cream yang hangat dan elegan, dirangkai dengan wrapping estetik yang premium.' },
-            { id: 'buket-satin-5', categoryId: 'buket-satin', name: 'Buket Satin Pink Pastel', price: 135000, img: 'gambar/buket.satin.5.jpg', desc: 'Buket satin berwarna Pink pastel yang mewah dan penuh gaya. Cocok untuk hadiah istimewa.' },
-            { id: 'buket-boneka-1', categoryId: 'buket-boneka', name: 'Buket Teddy Bear', price: 48000, img: 'gambar/buket.boneka.1.jpg', desc: 'Buket imut dengan boneka Teddy Bear mungil di tengahnya. Pasti disukai oleh anak-anak maupun remaja.' },
-            { id: 'buket-boneka-2', categoryId: 'buket-boneka', name: 'Buket Boneka Wisuda', price: 48000, img: 'gambar/buket.boneka.2.jpg', desc: 'Buket boneka beruang memakai toga dan atribut wisuda. Hadiah paling populer untuk momen kelulusan.' },
-            { id: 'buket-boneka-3', categoryId: 'buket-boneka', name: 'Buket Boneka Karakter', price: 48000, img: 'gambar/buket.boneka.3.jpg', desc: 'Pilihan boneka karakter favorit yang dirangkai layaknya buket bunga mekar yang lucu.' },
-            { id: 'buket-boneka-4', categoryId: 'buket-boneka', name: 'Buket Boneka Jumbo', price: 48000, img: 'gambar/buket.boneka.4.jpg', desc: 'Buket boneka berukuran cukup besar yang memberikan pelukan hangat bagi sang penerima.' },
-            { id: 'buket-boneka-5', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 30000, img: 'gambar/buket.guru.1.jpeg', desc: 'Buket boneka ukuran mini yang imut dan mudah dibawa, cocok untuk kejutan kecil namun bermakna.' },
-            { id: 'buket-boneka-6', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 30000, img: 'gambar/buket.guru.2.jpeg', desc: 'Buket boneka mini yang lucu dan ringkas, pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
-            { id: 'buket-boneka-7', categoryId: 'buket-boneka', name: 'Buket Hari Guru', price: 25000, img: 'gambar/buket.guru.3.jpeg', desc: 'Buket boneka mini yang lucu dan ringkas, pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
-            { id: 'buket-uang-1', categoryId: 'buket-uang', name: 'Buket Uang model 20 lbr', price: 159000, img: 'gambar/buket.uang.12.jpeg', desc: 'Buket uang kekinian berisi susunan uang 10 lembar (nominal sesuai permintaan) yang rapi dan aman.' },
-            { id: 'buket-uang-2', categoryId: 'buket-uang', name: 'Buket Uang model 35 lbr incloud duit', price: 435000, img: 'gambar/buket.uang.8.jpeg', desc: 'Buket uang elegan 10 lembar yang dirangkai sedemikian rupa sehingga tidak merusak uang.' },
-            { id: 'buket-uang-3', categoryId: 'buket-uang', name: 'Buket Uang 20 lbr model biasa', price: 159000, img: 'gambar/buket.uang.7.jpeg', desc: 'Versi minimalis untuk buket uang 10 lembar, cocok untuk hadiah praktis dengan budget terjangkau.' },
-            { id: 'buket-uang-4', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah incloud duit', price: 440000, img: 'gambar/buket.uang.4.jpg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-5', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 248000, img: 'gambar/buket.uang.5.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-6', categoryId: 'buket-uang', name: 'Buket Uang 8 lbr model mewah', price: 59000, img: 'gambar/buket.uang.6.jpeg', desc: 'Model mewah dengan 8 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-7', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 98000, img: 'gambar/buket.uang.1.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-8', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.2.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-9', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 48000, img: 'gambar/buket.uang.9.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-10', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 115000, img: 'gambar/buket.uang.10.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-11', categoryId: 'buket-uang', name: 'Buket Uang 10 lbr model mewah', price: 210000, img: 'gambar/buket.uang.11.jpeg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-uang-12', categoryId: 'buket-uang', name: 'Buket Uang 14 lbr duit campuran', price: 58000, img: 'gambar/buket.uang.3.jpg', desc: 'Model mewah dengan 10 lembar uang dan hiasan tambahan premium yang membuatnya terlihat mahal.' },
-            { id: 'buket-mini-1', categoryId: 'buket-mini', name: 'Buket Mini 1', price: 15000, img: 'gambar/buket.mini.1.jpg', desc: 'Buket mini lucu dan ringkas. Pilihan cerdas sebagai pemanis tambahan atau pelengkap bingkisan.' },
-            { id: 'buket-mini-2', categoryId: 'buket-mini', name: 'Buket Mini 2', price: 15000, img: 'gambar/buket.mini.2.jpg', desc: 'Desain buket berukuran kecil yang mudah dibawa-bawa namun tetap punya detail menawan.' },
-            { id: 'buket-mini-3', categoryId: 'buket-mini', name: 'Buket Mini 3', price: 15000, img: 'gambar/buket.mini.3.jpg', desc: 'Seri buket mini untuk acara perpisahan rekan kerja atau sekadar kejutan santai harian.' },
-            { id: 'buket-snack-1', categoryId: 'buket-snack', name: 'Buket Snack 1', price: 35000, img: 'gambar/buket.snack.1.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-2', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.2.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-3', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.3.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-4', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.4.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'buket-snack-5', categoryId: 'buket-snack', name: 'Buket Snack diluar isian (Harga jasa)', price: 40000, img: 'gambar/buket.snack.5.jpeg', desc: 'Buket snack lezat dan menarik untuk menemani momen spesialmu.' },
-            { id: 'printing-1', categoryId: 'printing', name: 'Fotocopy', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Melayani cetak satu sisi atau bolak-balik (duplex), perkecil/perbesar ukuran dokumen, serta fotocopy dokumen massal untuk kebutuhan rapat atau bahan ajar.' },
-            { id: 'printing-2', categoryId: 'printing', name: 'Scan Dokumen', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Konversi dokumen fisik (KTP, Ijazah, Sertifikat, dll) menjadi file digital berkualitas tinggi. Hasil file bisa dikirim dalam format PDF atau JPG via Email/WhatsApp.' },
-            { id: 'printing-3', categoryId: 'printing', name: 'Stiker Transparan', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Memberikan kesan elegan karena bagian latar belakang stiker tembus pandang.' },
-            { id: 'printing-4', categoryId: 'printing', name: 'Kartu Nama & Tag Harga (Hang Tag):', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Kartu nama dan tag harga berkualitas tinggi untuk kebutuhan promosi atau penjualan.' },
-            { id: 'printing-5', categoryId: 'printing', name: 'Brosur, Pamflet, & Leaflet:', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Layanan jasa cetak brosur, pamflet, dan leaflet berkualitas tinggi untuk kebutuhan promosi atau informasi.' },
-            { id: 'printing-6', categoryId: 'printing', name: 'Poster', price: 25000, img: 'gambar/printing.1.jpg', desc: 'Layanan jasa cetak poster berkualitas tinggi untuk kebutuhan promosi atau acara.' },
-            { id: 'cetak-foto-1', categoryId: 'cetak-foto', name: 'Cetak Foto 2R', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 2R dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-2', categoryId: 'cetak-foto', name: 'Cetak Foto 3R', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 3R dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-3', categoryId: 'cetak-foto', name: 'Cetak Foto 4R', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 4R dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-4', categoryId: 'cetak-foto', name: 'Cetak Foto 5R', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 5R dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-5', categoryId: 'cetak-foto', name: 'Cetak Foto 2x3', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 2x3 dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-6', categoryId: 'cetak-foto', name: 'Cetak Foto 3x4', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 3x4 dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'cetak-foto-7', categoryId: 'cetak-foto', name: 'Cetak Foto 4x6', price: 5000, img: 'gambar/cetak.foto.1.jpg', desc: 'Cetak foto ukuran 4x6 dengan kertas kualitas studio yang tajam, awet, dan anti luntur.' },
-            { id: 'jasa-design-1', categoryId: 'jasa-design', name: 'Design Feed Instagram', price: 30000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain feed Instagram estetik dan profesional yang bisa disesuaikan dengan konsep brand Anda.' },
-            { id: 'jasa-design-2', categoryId: 'jasa-design', name: 'Design Logo', price: 35000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain logo kreatif dan unik yang mencerminkan identitas dan nilai brand Anda.' },
-            { id: 'jasa-design-3', categoryId: 'jasa-design', name: 'Design Poster', price: 30000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain poster menarik dan informatif untuk kebutuhan promosi atau acara Anda.' },
-            { id: 'jasa-design-4', categoryId: 'jasa-design', name: 'Design Kartu Nama', price: 20000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain kartu nama profesional yang menciptakan kesan pertama yang kuat untuk bisnis Anda.' },
-            { id: 'jasa-design-5', categoryId: 'jasa-design', name: 'Design Brosur & Pamflet', price: 30000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain brosur dan pamflet yang menarik dan efektif untuk menyampaikan informasi atau promosi Anda.' },
-            { id: 'jasa-design-6', categoryId: 'jasa-design', name: 'Design Kemasan Produk', price: 30000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain kemasan produk yang kreatif dan fungsional untuk meningkatkan daya tarik dan nilai jual produk Anda.' },
-            { id: 'jasa-design-7', categoryId: 'jasa-design', name: 'Design Mockup Baju', price: 40000, img: 'gambar/mockup.baju.jpg', desc: 'Jasa desain mockup baju yang realistis dan menarik untuk memperlihatkan desain produk Anda.' },
-            { id: 'jasa-design-8', categoryId: 'jasa-design', name: 'Design Mockup Kemeja', price: 40000, img: 'gambar/mockup.kemeja.jpg', desc: 'Jasa desain mockup kemeja yang realistis dan menarik untuk memperlihatkan desain produk Anda.' },
-            { id: 'jasa-design-9', categoryId: 'jasa-design', name: 'Design Spanduk/Banner', price: 30000, img: 'gambar/jasa.design.1.jpg', desc: 'Jasa desain infografis yang informatif dan menarik untuk menyampaikan data atau informasi kompleks dengan cara yang mudah dipahami.' },
-            { id: 'minyak-1', categoryId: 'minyak', name: 'Minyak Kelapa Daun Pandan', price: 15000, img: 'gambar/minyak.1.jpg', desc: 'Minyak alami dari racikan kelapa dan esens daun pandan, menyehatkan dan sangat wangi.' },
-            { id: 'minyak-2', categoryId: 'minyak', name: 'Minyak Gamat', price: 15000, img: 'gambar/minyak.2.png', desc: 'Minyak alami dari gamat yang memiliki manfaat kesehatan dan aroma yang harum.' }
-        ];
+        let allProducts = [];
 
         /* --- LOGICAL STATE MANAGEMENT --- */
         let cart = [];
@@ -820,13 +755,6 @@
         const favoriteView = document.getElementById('favorite-view');
         const mainNav = document.getElementById('main-nav');
         const scrollWrapper = document.getElementById('scroll-wrapper');
-
-        /* --- INITIALIZATION CONTROLLER --- */
-        // Menambahkan String Format Harga & Nilai Rating Acak Estetis
-        allProducts.forEach(p => {
-            p.priceStr = `Rp ${p.price.toLocaleString('id-ID')}`;
-            p.rating = (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1);
-        });
 
         // Merender Seluruh Kategori ke Kontainer Horizontal
         const catContainer = document.getElementById('category-container');
@@ -998,7 +926,7 @@
             const isFav = favorites.includes(prod.id);
             const favColor = isFav ? 'text-[#FF8FA3]' : 'text-neutral-300';
             const favFill = isFav ? 'currentColor' : 'none';
-            
+
             // Ubah menjadi 0.1 atau 0.15
             const delay = index * 0.1;
 
@@ -1399,16 +1327,418 @@
             const modal = document.getElementById('image-zoom-modal');
             const img = document.getElementById('zoomed-image');
 
-            // Mulai animasi tutup
-            modal.classList.add('opacity-0');
-            img.classList.remove('scale-100');
-            img.classList.add('scale-95');
-
             // Sembunyikan modal setelah animasi selesai
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 300);
+        }
+    </script>
+
+    <!-- ========================================== -->
+    <!-- 1. MODAL FORM CHECKOUT (MULTI-PAYMENT) -->
+    <!-- ========================================== -->
+    <div id="checkout-modal"
+        class="fixed inset-0 z-[100] hidden flex-col items-center justify-end sm:justify-center bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full sm:w-[90%] max-w-[400px] rounded-t-[32px] sm:rounded-[32px] p-6 shadow-2xl transform translate-y-full sm:translate-y-0 transition-transform duration-300 overflow-y-auto max-h-[90dvh]"
+            id="checkout-modal-content">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-[18px] font-black text-neutral-900">Detail Pesanan</h3>
+                <button onclick="closeCheckoutModal()"
+                    class="w-8 h-8 bg-neutral-100 rounded-full flex justify-center items-center text-neutral-600 font-bold hover:bg-neutral-200">X</button>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-[13px] font-bold text-neutral-700 block mb-1.5">Nama Lengkap</label>
+                <input type="text" id="input-nama" placeholder="Contoh: Kak Dinda"
+                    class="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-[14px] outline-none focus:border-[#FF8FA3] focus:ring-1 focus:ring-[#FF8FA3] transition-all">
+            </div>
+
+            <div class="mb-4">
+                <label class="text-[13px] font-bold text-neutral-700 block mb-1.5">Alamat / Catatan Tambahan</label>
+                <textarea id="input-catatan" placeholder="Contoh: Tolong pitanya warna ungu ya kak..." rows="2"
+                    class="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-[14px] outline-none focus:border-[#FF8FA3] focus:ring-1 focus:ring-[#FF8FA3] transition-all"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-[13px] font-bold text-neutral-700 block mb-1.5">Metode Pembayaran</label>
+                <select id="input-metode" onchange="togglePaymentUI()"
+                    class="w-full bg-white border border-pink-200 rounded-xl px-4 py-3 text-[14px] outline-none focus:border-[#FF8FA3] focus:ring-1 focus:ring-[#FF8FA3] transition-all font-bold text-neutral-700 shadow-sm appearance-none">
+                    <option value="Cash/Pickup">💵 Bayar di Toko (Cash/Pickup)</option>
+                    <option value="QRIS">📱 Scan QRIS</option>
+                    <option value="Transfer BSI">🏦 Transfer BSI</option>
+                    <option value="GoPay">🟢 GoPay</option>
+                    <option value="ShopeePay">🟠 ShopeePay</option>
+                    <option value="DANA">🔵 DANA</option>
+                </select>
+            </div>
+
+            <!-- KARTU INFO REKENING -->
+            <div id="payment-info-section"
+                class="hidden mb-6 p-4 bg-[#FFF5F8] border border-pink-100 rounded-2xl text-center shadow-[inset_0_2px_10px_rgba(255,143,163,0.05)] transition-all">
+                <p id="payment-title" class="text-[12px] font-black text-[#FF8FA3] mb-1 uppercase tracking-widest">Info
+                    Pembayaran</p>
+
+                <div class="bg-white rounded-xl p-3 shadow-sm border border-pink-50 mt-2 mb-2">
+                    <p id="payment-desc" class="text-[16px] font-black text-neutral-800 tracking-wider">1234567890</p>
+                    <p class="text-[11px] font-bold text-neutral-500 mt-0.5">a.n Monika</p>
+                </div>
+
+                <img id="payment-img" src="gambar/qris.jpg" alt="QRIS Vestra"
+                    onerror="this.src='https://via.placeholder.com/150/FFE4E1/FFB6C1?text=Foto+QRIS'"
+                    class="w-36 h-36 mx-auto rounded-xl mt-3 object-cover shadow-sm border border-white hidden">
+
+                <p class="text-[10px] text-neutral-400 mt-3 font-medium italic">*Silakan lakukan pembayaran ke nomor di
+                    atas sebelum menekan tombol Bayar Sekarang.</p>
+            </div>
+
+            <button onclick="prosesCheckoutAkhir()" id="btn-kirim"
+                class="w-full h-14 rounded-full bg-[#FF8FA3] shadow-[0_8px_20px_rgba(255,143,163,0.3)] flex justify-center items-center text-white font-bold text-[15px] hover:bg-[#FF7A93] active:scale-[0.98] transition-all mt-2">
+                Bayar Sekarang
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. MODAL INVOICE / NOTA -->
+    <!-- ========================================== -->
+    <div id="invoice-modal"
+        class="fixed inset-0 z-[110] hidden flex-col items-center justify-center bg-black/60 backdrop-blur-md opacity-0 transition-opacity duration-300 p-4">
+        <div class="bg-[#FFF5F8] w-full max-w-[360px] rounded-[32px] p-6 shadow-2xl relative border border-pink-100 transform scale-95 transition-transform duration-300"
+            id="invoice-modal-content">
+            <div class="absolute -top-3 left-6 w-6 h-6 bg-white rounded-full"></div>
+            <div class="absolute -top-3 right-6 w-6 h-6 bg-white rounded-full"></div>
+
+            <div class="text-center mb-6 pt-2">
+                <h2 class="text-[22px] font-black text-neutral-900 tracking-tight">Nota Pesanan</h2>
+                <p class="text-[12px] font-bold text-[#FF8FA3]" id="inv-order-id">#MCN-XXXX</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-neutral-100 mb-6">
+                <div class="flex justify-between text-[13px] mb-2">
+                    <span class="text-neutral-500 font-medium">Nama Pemesan</span>
+                    <span class="font-bold text-neutral-800" id="inv-nama">Nama</span>
+                </div>
+                <div class="flex justify-between text-[13px] mb-2">
+                    <span class="text-neutral-500 font-medium">Pembayaran</span>
+                    <span class="font-bold text-neutral-800" id="inv-metode">BSI</span>
+                </div>
+                <div class="w-full h-[1px] bg-neutral-100 border-dashed border-b-2 border-neutral-200 my-3"></div>
+                <div class="flex justify-between text-[14px]">
+                    <span class="text-neutral-600 font-bold">Total Bayar</span>
+                    <span class="font-black text-[#FF8FA3] text-[16px]" id="inv-total">Rp 0</span>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-center font-medium text-neutral-500 mb-6 px-2">
+                Pesanan Anda sudah masuk ke sistem kami. Silakan klik tombol di bawah untuk konfirmasi ke WhatsApp
+                Admin.
+            </p>
+
+            <button onclick="konfirmasiKeWA()"
+                class="w-full h-12 rounded-xl bg-green-500 shadow-[0_5px_15px_rgba(34,197,94,0.3)] flex justify-center items-center gap-2 text-white font-bold text-[14px] hover:bg-green-600 active:scale-[0.98] transition-all mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                    <path fill-rule="evenodd"
+                        d="M12 2C6.48 2 2 6.48 2 12c0 1.7.4 3.4 1.2 4.9L2 22l5.2-1.1c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.48 10-10S17.52 2 12 2zm0 18.1c-1.5 0-3-.4-4.3-1.1l-.3-.2-3.2.7.7-3.1-.2-.3C4.1 14.8 3.6 13.4 3.6 12c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.4-8.4 8.4zm4.6-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.2-.5-.5-1-1.1-1.4-1.7-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.3.4-.4.1-.2 0-.4 0-.5C10 9.5 9.4 8 9.3 7.4c-.1-.5-.2-.5-.4-.5h-.4c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 2s.8 2.3 1 2.5c.2.2 1.7 2.6 4.1 3.6 2.4 1 2.4.7 2.8.7.4 0 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.3-.2-.5-.3z"
+                        clip-rule="evenodd" />
+                </svg>
+                Konfirmasi ke WhatsApp
+            </button>
+
+            <button onclick="tutupInvoice()"
+                class="w-full h-10 rounded-xl bg-white border border-neutral-200 flex justify-center items-center text-neutral-600 font-bold text-[13px] hover:bg-neutral-50 active:scale-[0.98] transition-all">
+                Tutup Nota
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. SCRIPT FIREBASE & LOGIKA                -->
+    <!-- ========================================== -->
+    <div id="floating-ticket" class="hidden fixed top-20 right-4 z-40 animate-bounce">
+        <button onclick="bukaTracking()"
+            class="bg-white border-2 border-[#FF8FA3] text-[#FF8FA3] px-4 py-2 rounded-full shadow-[0_10px_20px_rgba(255,143,163,0.3)] flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors">
+            <span class="text-xl">🎫</span>
+            <span class="text-[12px] font-black uppercase tracking-wide">Lacak Pesanan</span>
+        </button>
+    </div>
+
+    <div id="tracking-modal"
+        class="fixed inset-0 z-[120] hidden flex-col items-center justify-center bg-black/60 backdrop-blur-md opacity-0 transition-opacity duration-300 p-4">
+        <div class="bg-white w-full max-w-[340px] rounded-[32px] p-6 shadow-2xl relative border border-pink-100 transform scale-95 transition-transform duration-300"
+            id="tracking-modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-[18px] font-black text-neutral-900">Status Pesanan</h2>
+                <button onclick="tutupTracking()"
+                    class="w-8 h-8 bg-neutral-100 rounded-full flex justify-center items-center text-neutral-600 font-bold hover:bg-neutral-200">X</button>
+            </div>
+
+            <p class="text-[12px] font-bold text-[#FF8FA3] mb-6 bg-pink-50 w-fit px-3 py-1 rounded-full"
+                id="track-order-id">#MCN-XXXX</p>
+
+            <div class="relative pl-4 border-l-2 border-neutral-100 ml-3 mb-6 space-y-6">
+                <div class="relative">
+                    <div id="dot-masuk"
+                        class="absolute -left-[23px] top-1 w-4 h-4 bg-neutral-200 rounded-full border-4 border-white shadow-sm transition-all">
+                    </div>
+                    <h4 id="text-masuk" class="text-[14px] font-bold text-neutral-400 transition-all">1. Pesanan Masuk
+                    </h4>
+                    <p class="text-[11px] text-neutral-400 mt-1">Pesanan sudah kami terima dan sedang dikonfirmasi.</p>
+                </div>
+                <div class="relative">
+                    <div id="dot-dirangkai"
+                        class="absolute -left-[23px] top-1 w-4 h-4 bg-neutral-200 rounded-full border-4 border-white shadow-sm transition-all">
+                    </div>
+                    <h4 id="text-dirangkai" class="text-[14px] font-bold text-neutral-400 transition-all">2. Sedang
+                        Dirangkai</h4>
+                    <p class="text-[11px] text-neutral-400 mt-1">Buket cantikmu sedang dibuat dengan penuh detail.</p>
+                </div>
+                <div class="relative">
+                    <div id="dot-selesai"
+                        class="absolute -left-[23px] top-1 w-4 h-4 bg-neutral-200 rounded-full border-4 border-white shadow-sm transition-all">
+                    </div>
+                    <h4 id="text-selesai" class="text-[14px] font-bold text-neutral-400 transition-all">3. Siap Diambil
+                        / Dikirim</h4>
+                    <p class="text-[11px] text-neutral-400 mt-1">Hore! Pesanan selesai dan siap diserahkan.</p>
+                </div>
+            </div>
+
+            <button onclick="hapusKarcis()"
+                class="w-full text-center text-[11px] font-bold text-red-400 hover:text-red-500 underline underline-offset-2">
+                Hapus Tiket Pesanan Ini
+            </button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuvtOJVNuBuc0vSJnR2qwbpY_tVr20B34",
+            authDomain: "moonchan-app.firebaseapp.com",
+            projectId: "moonchan-app",
+            storageBucket: "moonchan-app.firebasestorage.app",
+            messagingSenderId: "480724882393",
+            appId: "1:480724882393:web:7166da8be545eb6fd67fc8",
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        let dataNota = {};
+
+        // Menjalankan fungsi sesaat setelah struktur halaman siap (tidak peduli gambar rusak/belum dimuat)
+        document.addEventListener('DOMContentLoaded', () => {
+            cekKarcisAktif();
+            tarikKatalogDariFirebase();
+        });
+
+        // ==========================================
+        // FUNGSI SAKTI: SINKRONISASI KATALOG REAL-TIME
+        // ==========================================
+        function tarikKatalogDariFirebase() {
+            db.collection("katalog_produk").onSnapshot((snapshot) => {
+                allProducts = []; // Kosongkan etalase sebelum diisi data baru dari Firebase
+
+                snapshot.forEach((doc) => {
+                    let data = doc.data();
+
+                    let imgUrl = data.gambar_url || '';
+                    if (imgUrl !== '' && !imgUrl.startsWith('http')) {
+                        imgUrl = 'https://www.moonchan.my.id/' + imgUrl;
+                    }
+
+                    allProducts.push({
+                        id: doc.id,
+                        categoryId: data.kategori_id || 'semua-produk',
+                        name: data.nama || 'Tanpa Nama',
+                        price: data.harga || 0,
+                        priceStr: `Rp ${(data.harga || 0).toLocaleString('id-ID')}`,
+                        rating: (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1),
+                        img: imgUrl,
+                        desc: data.deskripsi || 'Produk premium dengan sentuhan eksklusif.'
+                    });
+                });
+
+                const activeCategoryBtn = document.querySelector('.category-btn [class*="text-[#FF8FA3]"]');
+                if (activeCategoryBtn) {
+                    const onclickText = activeCategoryBtn.closest('.category-btn').getAttribute('onclick');
+                    const catId = onclickText.match(/'([^']+)'/)[1];
+                    renderProducts(catId);
+                } else {
+                    renderProducts('semua-produk');
+                }
+
+                renderFavorites();
+
+                if (document.getElementById('search-input').value.trim() !== '') {
+                    filterSearch();
+                }
+            }, (error) => {
+                // TAMPILKAN PESAN JIKA GAGAL MENGAMBIL DATA (PENTING)
+                console.error("Firebase Error:", error);
+                alert("Gagal memuat katalog dari server: " + error.message);
+            });
+        }
+
+        function checkoutKeFirebase() {
+            if (cart.length === 0) { showToast('❌ Masukkan barang ke keranjang dulu ya!'); return; }
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            document.getElementById('input-metode').value = "Cash/Pickup";
+            togglePaymentUI();
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('translate-y-full'); }, 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            modal.classList.add('opacity-0'); content.classList.add('translate-y-full');
+            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        }
+
+        function togglePaymentUI() {
+            const metode = document.getElementById('input-metode').value;
+            const paymentSection = document.getElementById('payment-info-section');
+            const title = document.getElementById('payment-title');
+            const desc = document.getElementById('payment-desc');
+            const img = document.getElementById('payment-img');
+
+            if (metode === 'Cash/Pickup') {
+                paymentSection.classList.add('hidden');
+            } else {
+                paymentSection.classList.remove('hidden');
+                if (metode === 'QRIS') { title.innerText = "SCAN BARKODE QRIS"; desc.innerText = "Scan dari E-Wallet / M-Banking"; img.classList.remove('hidden'); }
+                else if (metode === 'Transfer BSI') { title.innerText = "TRANSFER BANK BSI"; desc.innerText = "7123 4567 89"; img.classList.add('hidden'); }
+                else if (metode === 'GoPay') { title.innerText = "TRANSFER GOPAY"; desc.innerText = "0815-3670-0267"; img.classList.add('hidden'); }
+                else if (metode === 'ShopeePay') { title.innerText = "TRANSFER SHOPEEPAY"; desc.innerText = "0815-3670-0267"; img.classList.add('hidden'); }
+                else if (metode === 'DANA') { title.innerText = "TRANSFER DANA"; desc.innerText = "0815-3670-0267"; img.classList.add('hidden'); }
+            }
+        }
+
+        async function prosesCheckoutAkhir() {
+            const nama = document.getElementById('input-nama').value;
+            const catatan = document.getElementById('input-catatan').value;
+            const metode = document.getElementById('input-metode').value;
+            const btnKirim = document.getElementById('btn-kirim');
+
+            if (!nama.trim()) { alert('Kak, namanya diisi dulu ya! 😊'); return; }
+
+            btnKirim.innerText = "Memproses Pembayaran... ⏳"; btnKirim.disabled = true;
+
+            try {
+                let detailPesanan = ""; let totalHarga = 0;
+                cart.forEach((item) => { detailPesanan += `${item.name} (${item.qty}x), `; totalHarga += (item.price * item.qty); });
+                detailPesanan = detailPesanan.slice(0, -2);
+                let totalHargaStr = `Rp ${totalHarga.toLocaleString('id-ID')}`;
+                const idPesanan = "MCN-" + Math.floor(1000 + Math.random() * 9000);
+
+                await db.collection("pesanan").add({
+                    id_pesanan: idPesanan, nama: nama, item: detailPesanan, harga: totalHargaStr,
+                    catatan: catatan, metode_pembayaran: metode, status: "Pesanan Masuk",
+                    waktu: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                dataNota = { id: idPesanan, nama: nama, total: totalHargaStr, metode: metode };
+
+                // FITUR BARU: SIMPAN ID PESANAN KE MEMORI HP PELANGGAN
+                localStorage.setItem("vestra_active_order", idPesanan);
+                cekKarcisAktif();
+
+                closeCheckoutModal(); cart = []; updateCartUI(); closeCart();
+                document.getElementById('input-nama').value = ""; document.getElementById('input-catatan').value = "";
+                document.getElementById('input-metode').value = "Cash/Pickup"; togglePaymentUI();
+                tampilkanInvoice();
+
+            } catch (error) {
+                console.error(error); alert("Oops, pesanan gagal. Error: " + error.message);
+            } finally {
+                btnKirim.innerText = "Bayar Sekarang"; btnKirim.disabled = false;
+            }
+        }
+
+        function tampilkanInvoice() {
+            document.getElementById('inv-order-id').innerText = "#" + dataNota.id; document.getElementById('inv-nama').innerText = dataNota.nama;
+            document.getElementById('inv-metode').innerText = dataNota.metode; document.getElementById('inv-total').innerText = dataNota.total;
+            const modal = document.getElementById('invoice-modal'); const content = document.getElementById('invoice-modal-content');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+        }
+
+        function tutupInvoice() {
+            const modal = document.getElementById('invoice-modal'); const content = document.getElementById('invoice-modal-content');
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        }
+
+        function konfirmasiKeWA() {
+            const nomorWAAdmin = "6281536700267";
+            let pesan = `Halo Kak Monika! 🌻\n\nSaya mau konfirmasi pembayaran untuk pesanan saya:\n\n*No. Pesanan:* ${dataNota.id}\n*Nama:* ${dataNota.nama}\n*Total:* ${dataNota.total}\n*Pembayaran via:* ${dataNota.metode}\n\n`;
+            pesan += (dataNota.metode !== 'Cash/Pickup') ? `Berikut saya lampirkan foto bukti transfernya ya kak. Terima kasih! ✨` : `Saya akan bayar tunai saat mengambil buket di toko ya kak. Terima kasih! ✨`;
+            window.open(`https://wa.me/${nomorWAAdmin}?text=${encodeURIComponent(pesan)}`, '_blank');
+            tutupInvoice();
+        }
+
+        function cekKarcisAktif() {
+            const orderId = localStorage.getItem("vestra_active_order");
+            const ticketBtn = document.getElementById("floating-ticket");
+            if (orderId) { ticketBtn.classList.remove("hidden"); }
+            else { ticketBtn.classList.add("hidden"); }
+        }
+
+        function bukaTracking() {
+            const orderId = localStorage.getItem("vestra_active_order");
+            if (!orderId) return;
+
+            document.getElementById('track-order-id').innerText = orderId;
+            const modal = document.getElementById('tracking-modal');
+            const content = document.getElementById('tracking-modal-content');
+
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+
+            db.collection("pesanan").where("id_pesanan", "==", orderId).onSnapshot((snapshot) => {
+                if (!snapshot.empty) {
+                    const statusAdmin = snapshot.docs[0].data().status;
+                    updateTimelineUI(statusAdmin);
+                }
+            });
+        }
+
+        function tutupTracking() {
+            const modal = document.getElementById('tracking-modal');
+            const content = document.getElementById('tracking-modal-content');
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        }
+
+        function hapusKarcis() {
+            if (confirm("Yakin ingin menghapus tiket pelacakan ini dari HP kamu? (Pesanan tidak akan batal)")) {
+                localStorage.removeItem("vestra_active_order");
+                tutupTracking();
+                cekKarcisAktif();
+            }
+        }
+
+        function updateTimelineUI(status) {
+            ['masuk', 'dirangkai', 'selesai'].forEach(step => {
+                document.getElementById(`dot-${step}`).className = "absolute -left-[23px] top-1 w-4 h-4 bg-neutral-200 rounded-full border-4 border-white shadow-sm transition-all";
+                document.getElementById(`text-${step}`).className = "text-[14px] font-bold text-neutral-400 transition-all";
+            });
+
+            if (status === "Pesanan Masuk" || status === "Sedang Dirangkai" || status === "Selesai") {
+                document.getElementById('dot-masuk').className = "absolute -left-[23px] top-1 w-4 h-4 bg-[#FF8FA3] rounded-full border-4 border-[#FFE4E1] shadow-sm animate-pulse";
+                document.getElementById('text-masuk').className = "text-[14px] font-black text-[#FF8FA3]";
+            }
+            if (status === "Sedang Dirangkai" || status === "Selesai") {
+                document.getElementById('dot-dirangkai').className = "absolute -left-[23px] top-1 w-4 h-4 bg-orange-400 rounded-full border-4 border-orange-100 shadow-sm animate-pulse";
+                document.getElementById('text-dirangkai').className = "text-[14px] font-black text-orange-500";
+            }
+            if (status === "Selesai") {
+                document.getElementById('dot-selesai').className = "absolute -left-[23px] top-1 w-4 h-4 bg-green-500 rounded-full border-4 border-green-100 shadow-sm animate-pulse";
+                document.getElementById('text-selesai').className = "text-[14px] font-black text-green-600";
+            }
         }
     </script>
 </body>
