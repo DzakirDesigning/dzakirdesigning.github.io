@@ -1625,36 +1625,61 @@
 
             if (!nama.trim()) { alert('Kak, namanya diisi dulu ya! 😊'); return; }
 
-            btnKirim.innerText = "Memproses Pembayaran... ⏳"; btnKirim.disabled = true;
+            btnKirim.innerText = "Memproses Pembayaran... ⏳";
+            btnKirim.disabled = true;
 
             try {
-                let detailPesanan = ""; let totalHarga = 0;
-                cart.forEach((item) => { detailPesanan += `${item.name} (${item.qty}x), `; totalHarga += (item.price * item.qty); });
+                let detailPesanan = "";
+                let totalHarga = 0;
+
+                // --- FITUR BARU: Menarik link gambar dari keranjang ---
+                let gambarUtama = "";
+                if (cart.length > 0) {
+                    gambarUtama = cart[0].gambar_url || cart[0].image || cart[0].img || "";
+                }
+
+                cart.forEach((item) => {
+                    detailPesanan += `${item.name} (${item.qty}x), `;
+                    totalHarga += (item.price * item.qty);
+                });
+
                 detailPesanan = detailPesanan.slice(0, -2);
                 let totalHargaStr = `Rp ${totalHarga.toLocaleString('id-ID')}`;
                 const idPesanan = "MCN-" + Math.floor(1000 + Math.random() * 9000);
 
+                // --- MENGIRIM DATA KE FIREBASE BESERTA GAMBAR ---
                 await db.collection("pesanan").add({
-                    id_pesanan: idPesanan, nama: nama, item: detailPesanan, harga: totalHargaStr,
-                    catatan: catatan, metode_pembayaran: metode, status: "Pesanan Masuk",
-                    waktu: firebase.firestore.FieldValue.serverTimestamp()
+                    id_pesanan: idPesanan,
+                    nama: nama,
+                    item: detailPesanan,
+                    harga: totalHargaStr,
+                    catatan: catatan,
+                    metode_pembayaran: metode,
+                    status: "Pesanan Masuk",
+                    waktu: firebase.firestore.FieldValue.serverTimestamp(),
+                    gambar_url: gambarUtama
                 });
 
-                dataNota = { id: idPesanan, nama: nama, total: totalHargaStr, metode: metode };
+                // --- BAGIAN PENUTUP (SUKSES) ---
+                alert("Yay! Pesanan berhasil dibuat. Terima kasih, Kak! 😊");
 
-                // FITUR BARU: SIMPAN ID PESANAN KE MEMORI HP PELANGGAN
-                localStorage.setItem("vestra_active_order", idPesanan);
-                cekKarcisAktif();
+                // Mengosongkan keranjang dan mengembalikan tombol
+                cart = [];
+                if (typeof updateCartUI === "function") updateCartUI(); // Update tampilan keranjang jika ada
 
-                closeCheckoutModal(); cart = []; updateCartUI(); closeCart();
-                document.getElementById('input-nama').value = ""; document.getElementById('input-catatan').value = "";
-                document.getElementById('input-metode').value = "Cash/Pickup"; togglePaymentUI();
-                tampilkanInvoice();
+                btnKirim.innerText = "Kirim Pesanan";
+                btnKirim.disabled = false;
+
+                // Jika kamu punya fitur reload halaman setelah pesan, bisa pakai ini:
+                // window.location.reload(); 
 
             } catch (error) {
-                console.error(error); alert("Oops, pesanan gagal. Error: " + error.message);
-            } finally {
-                btnKirim.innerText = "Bayar Sekarang"; btnKirim.disabled = false;
+                // --- BAGIAN PENUTUP (ERROR) YANG TADI TERHAPUS ---
+                console.error("Gagal mengirim pesanan: ", error);
+                alert("Maaf, terjadi kesalahan saat mengirim pesanan. Coba lagi ya!");
+
+                btnKirim.innerText = "Kirim Pesanan";
+                btnKirim.disabled = false;
             }
         }
 
