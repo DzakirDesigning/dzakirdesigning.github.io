@@ -1618,10 +1618,16 @@
         }
 
         async function prosesCheckoutAkhir() {
-            const nama = document.getElementById('input-nama').value;
-            const catatan = document.getElementById('input-catatan').value;
-            const metode = document.getElementById('input-metode').value;
+            // Menangkap elemen input agar mudah di-reset nanti
+            const inputNamaElem = document.getElementById('input-nama');
+            const inputCatatanElem = document.getElementById('input-catatan');
+            const inputMetodeElem = document.getElementById('input-metode');
             const btnKirim = document.getElementById('btn-kirim');
+
+            // Mengambil nilai teksnya
+            const nama = inputNamaElem.value;
+            const catatan = inputCatatanElem.value;
+            const metode = inputMetodeElem.value;
 
             if (!nama.trim()) { alert('Kak, namanya diisi dulu ya! 😊'); return; }
 
@@ -1632,7 +1638,7 @@
                 let detailPesanan = "";
                 let totalHarga = 0;
 
-                // --- FITUR BARU: Menarik link gambar dari keranjang ---
+                // Tarik link gambar produk pertama
                 let gambarUtama = "";
                 if (cart.length > 0) {
                     gambarUtama = cart[0].gambar_url || cart[0].image || cart[0].img || "";
@@ -1647,7 +1653,7 @@
                 let totalHargaStr = `Rp ${totalHarga.toLocaleString('id-ID')}`;
                 const idPesanan = "MCN-" + Math.floor(1000 + Math.random() * 9000);
 
-                // --- MENGIRIM DATA KE FIREBASE BESERTA GAMBAR ---
+                // --- KIRIM KE FIREBASE BESERTA GAMBAR ---
                 await db.collection("pesanan").add({
                     id_pesanan: idPesanan,
                     nama: nama,
@@ -1660,24 +1666,36 @@
                     gambar_url: gambarUtama
                 });
 
-                // --- BAGIAN PENUTUP (SUKSES) ---
-                alert("Yay! Pesanan berhasil dibuat. Terima kasih, Kak! 😊");
+                // 1. Simpan data untuk dipanggil oleh Struk (Tanpa kata 'window.')
+                dataNota = {
+                    id: idPesanan,
+                    nama: nama,
+                    total: totalHargaStr,
+                    metode: metode
+                };
 
-                // Mengosongkan keranjang dan mengembalikan tombol
+                // 2. Simpan tiket pesanan di HP pelanggan
+                localStorage.setItem("vestra_active_order", idPesanan);
+
+                // 3. Kosongkan keranjang di sistem
                 cart = [];
-                if (typeof updateCartUI === "function") updateCartUI(); // Update tampilan keranjang jika ada
+                if (typeof updateCartUI === "function") updateCartUI();
 
+                // 4. KOSONGKAN FORM INPUT (RESET) SETELAH BERHASIL
+                inputNamaElem.value = "";
+                inputCatatanElem.value = "";
+
+                // 5. Kembalikan tulisan tombol ke kondisi semula
                 btnKirim.innerText = "Kirim Pesanan";
                 btnKirim.disabled = false;
 
-                // Jika kamu punya fitur reload halaman setelah pesan, bisa pakai ini:
-                // window.location.reload(); 
+                // 6. Munculkan Struk & Karcis Tracking
+                tampilkanInvoice();
+                cekKarcisAktif();
 
             } catch (error) {
-                // --- BAGIAN PENUTUP (ERROR) YANG TADI TERHAPUS ---
                 console.error("Gagal mengirim pesanan: ", error);
                 alert("Maaf, terjadi kesalahan saat mengirim pesanan. Coba lagi ya!");
-
                 btnKirim.innerText = "Kirim Pesanan";
                 btnKirim.disabled = false;
             }
